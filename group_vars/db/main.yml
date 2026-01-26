@@ -109,9 +109,10 @@ db_firewall_etcd_ports:
 app_db_name: "appdb"
 app_schema: "app"
 api_db_user: "api_app"
-svc_api_password: "{{svc_api_password}}"
+svc_api_password: "{{vault_svc_api_password}}"
+api_db_password: "{{vault_api_db_password}}"
 dbt_db_user: "dbT"
-api_schema: "app"
+api_schema: "api"
 svc_api_role: "svc_api"
 haproxy_allowed_ips:
   - "10.2.3.1/32"
