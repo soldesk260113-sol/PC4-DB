@@ -41,4 +41,25 @@
         {{ api_schema }}.energy_kepco_monthly_id_seq,
         {{ api_schema }}.energy_gas_id_seq
       TO {{ svc_api_role }};
+- name: Grant USAGE on api schema to api_app
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_query:
+    db: "{{ app_db_name }}"
+    query: "GRANT USAGE ON SCHEMA {{ api_schema }} TO {{ api_db_user }};"
+  when: patroni_is_primary | bool
+
+- name: Grant SELECT on api tables to api_app
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_query:
+    db: "{{ app_db_name }}"
+    query: |
+      GRANT SELECT ON TABLE
+        {{ api_schema }}.weather_mid_temp,
+        {{ api_schema }}.weather_mid_land,
+        {{ api_schema }}.energy_kepco_monthly,
+        {{ api_schema }}.energy_gas
+      TO {{ api_db_user }};
+  when: patroni_is_primary | bool
 
