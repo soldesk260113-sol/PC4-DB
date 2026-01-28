@@ -11,7 +11,7 @@
         base_date DATE,
         tm_fc TEXT,
         data JSONB,
-        created_at TIMESTAMP DEFAULT now()
+        created_at TIMESTAMP DEFAULT now(),
         CONSTRAINT weather_mid_temp_reg_tmfc_uk UNIQUE (reg_id, tm_fc)
       );
 
@@ -21,7 +21,7 @@
         base_date DATE,
         tm_fc TEXT,
         data JSONB,
-        created_at TIMESTAMP DEFAULT now()
+        created_at TIMESTAMP DEFAULT now(),
         CONSTRAINT weather_mid_land_reg_tmfc_uk UNIQUE (reg_id, tm_fc)
       );
 
